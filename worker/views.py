@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .models import Worker, Resume
-from .forms import ResumeEditForm
+from .forms import ResumeEditForm, ResumeForm
+
 
 def workers(request):
     workers_queryset = Worker.objects.all()
@@ -72,3 +73,17 @@ def add_resume(request):
         new_resume.text = request.POST["form-text"]
         new_resume.save()
         return HttpResponse("Запись добавлена!")
+
+def resume_add_via_django_form(request):
+    if request.method == 'POST':
+        form = ResumeForm(request.POST)
+
+        if form.is_valid():
+            new_resume = form.save()
+            return redirect(f'/resume-info/{new_resume.id}/')
+    resume_form = ResumeForm()
+    return render(
+        request,
+        'resume/resume_django_form.html',
+        {"resume_form" : resume_form}
+    )
