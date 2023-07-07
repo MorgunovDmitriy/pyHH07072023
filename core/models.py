@@ -2,6 +2,18 @@ from django.db import models
 from worker.models import Worker
 
 
+class Company(models.Model):
+    workers = models.ManyToManyField(
+        to=Worker,
+        blank=True,
+    )
+    name_company = models.CharField(max_length=255,verbose_name='Название компании')
+    founding_date =models.DateField(verbose_name='Дата основания')
+    address_company = models.CharField(max_length=255,verbose_name='Адрес компании')
+
+    def __str__(self):
+        return self.name_company
+
 class Vacancy(models.Model):
     title = models.CharField(max_length=255)
     salary = models.IntegerField(null=True, blank=True)

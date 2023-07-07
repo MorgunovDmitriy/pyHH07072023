@@ -1,6 +1,23 @@
 from django import forms
-from .models import Vacancy
+from .models import Vacancy, Company
 
+class CompanyForm(forms.ModelForm):
+    class Meta:
+        model = Company
+        fields = [
+            'name_company',
+            'founding_date',
+            'address_company'
+        ]
+
+class CompanyEditForm(forms.ModelForm):
+    class Meta:
+        model = Company
+        fields = [
+            'name_company',
+            'founding_date',
+            'address_company'
+        ]
 
 class VacancyForm(forms.ModelForm):
     class Meta:

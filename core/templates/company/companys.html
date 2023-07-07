@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Компании</title>
+</head>
+<body>
+  <h1>Компании</h1>
+     {% for v in companys %}
+    <div>{{ v.name_company }} - {{ v.address_company }}</div>
+
+    {% endfor %}
+</body>
+</html>

@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.models import User
-from .models import Vacancy
-from .forms import VacancyForm, VacancyEditForm
+from .models import Vacancy,Company
+from .forms import VacancyForm, VacancyEditForm,CompanyForm,CompanyEditForm
 
 # Create your views here.
 def homepage(request):
@@ -25,7 +25,38 @@ def address(request):
             <li>г. Ош, Черёмушка, дом 235</li>
         </ul>
     ''')
+def company_add_django_form(request):
+    if request.method == "POST":
+        form = CompanyForm(request.POST)
+        if form.is_valid():
+            new_company = form.save()
+            return redirect(f'/companys/')
+    company_form = CompanyForm()
+    return render(
+        request,
+        'company/company_django_form.html',
+        {"company_form": company_form}
+    )
 
+# def company_edit_df(request, id):
+#     company_object = Company.objects.get(id=id)
+#
+#     if request.method == "GET":
+#         form = CompanyEditForm(instance=company_object)
+#         return render(request, "company/company_edit.html", {"form": form})
+#
+#     elif request.method == "POST":
+#         form = CompanyEditForm(data=request.POST, instance=company_object)
+#         if form.is_valid():
+#             obj = form.save()
+#             return redirect(company, id=obj.id)
+#         else:
+#             return HttpResponse("Форма не валидна")
+
+def company(request):
+    companys = Company.objects.all() #SElect в Django ORM
+    context={"companys":companys}
+    return render(request, 'company/companys.html',context)
 
 def vacancy_list(request):
     vacancies = Vacancy.objects.all()  # в Django ORM "SELECT * FROM Vacancies"
