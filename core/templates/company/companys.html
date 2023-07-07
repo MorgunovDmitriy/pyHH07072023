@@ -8,7 +8,7 @@
   <h1>Компании</h1>
      {% for v in companys %}
     <div>{{ v.name_company }} - {{ v.address_company }}</div>
-
+    <a href="{% url 'company-edit-df' company.id %}">Изменить</a>
     {% endfor %}
 </body>
 </html>

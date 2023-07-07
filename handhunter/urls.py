@@ -28,7 +28,7 @@ urlpatterns = [
     path('address/', address),
     path('companys/', company),
     path('add-company-df/', company_add_django_form),
-    # path('company-edit-df/<int:id>/', company_edit_df, name='company-edit-df'),
+    path('company-edit-df/<int:id>/', company_edit_df),
     path('vacancies/', vacancy_list),
     path('vacancy/<int:id>/', vacancy_detail, name='vacancy-info'),
     path('vacancy-edit/<int:id>/', vacancy_edit, name='vacancy-edit'),

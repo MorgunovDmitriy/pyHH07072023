@@ -38,20 +38,20 @@ def company_add_django_form(request):
         {"company_form": company_form}
     )
 
-# def company_edit_df(request, id):
-#     company_object = Company.objects.get(id=id)
-#
-#     if request.method == "GET":
-#         form = CompanyEditForm(instance=company_object)
-#         return render(request, "company/company_edit.html", {"form": form})
-#
-#     elif request.method == "POST":
-#         form = CompanyEditForm(data=request.POST, instance=company_object)
-#         if form.is_valid():
-#             obj = form.save()
-#             return redirect(company, id=obj.id)
-#         else:
-#             return HttpResponse("Форма не валидна")
+def company_edit_df(request, id):
+    company_object = Company.objects.get(id=id)
+
+    if request.method == "GET":
+        form = CompanyEditForm(instance=company_object)
+        return render(request, "company/company_edit.html", {"form": form})
+
+    elif request.method == "POST":
+        form = CompanyEditForm(data=request.POST, instance=company_object)
+        if form.is_valid():
+            obj = form.save()
+            return redirect(company, id=obj.id)
+        else:
+            return HttpResponse("Форма не валидна")
 
 def company(request):
     companys = Company.objects.all() #SElect в Django ORM
