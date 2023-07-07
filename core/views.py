@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.models import User
 from .models import Vacancy
-from .forms import VacancyForm
+from .forms import VacancyForm, VacancyEditForm
 
 # Create your views here.
 def homepage(request):
@@ -106,3 +106,18 @@ def vacancy_edit(request, id):
         request, 'vacancy/vacancy_edit_form.html',
         {"vacancy": vacancy}
     )
+
+def vacancy_edit_df(request, id):
+    resume_object = Vacancy.objects.get(id=id)
+
+    if request.method == "GET":
+        form = VacancyEditForm(instance=resume_object)
+        return render(request, "vacancy/vacancy_edit_form_df.html", {"form": form})
+
+    elif request.method == "POST":
+        form = VacancyEditForm(data=request.POST, instance=resume_object)
+        if form.is_valid():
+            obj = form.save()
+            return redirect(vacancy_detail, id=obj.id)
+        else:
+            return HttpResponse("Форма не валидна")

@@ -15,7 +15,10 @@
                 {{ v.title }}
             </a>
              - {{ v.salary }}
+
         </div>
+            <a href="{% url 'vacancy-edit-df' v.id %}">Изменить</a>
+<hr>
     {% endfor %}
 
 {% endblock %}
