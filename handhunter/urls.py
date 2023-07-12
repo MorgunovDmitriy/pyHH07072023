@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path
 from core.views import *
 from worker.views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -46,4 +48,7 @@ urlpatterns = [
     path('search/', search, name='search'),
     path('registration/', reg_view, name='reg'),
 
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# ...:8000/static/my_style.css  #  .../handhunter/core/static/my_style.css
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
-{% block content %}
-
-    <form method="POST">
-        {% csrf_token %}
-        {{ company_form.as_p }}
-        <button>Добавить компанию</button>
-    </form>
-
-{% endblock %}
+    {% block content %}
+        <div class="container">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <input class="form-control" {{ company_form.as_p }}
+                    <button class="btn btn-primary">Добавить компанию</button>
+                </div>
+            </form>
+        </div>
+    {% endblock %}
